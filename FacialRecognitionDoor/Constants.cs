@@ -6,17 +6,18 @@
     public static class GeneralConstants
     {
         // This variable should be set to false for devices, unlike the Raspberry Pi, that have GPU support
-        public const bool DisableLiveCameraFeed = true;
+        public const bool DisableLiveCameraFeed = false;
 
         // Oxford Face API Primary should be entered here
         // You can obtain a subscription key for Face API by following the instructions here: https://azure.microsoft.com/en-us/try/cognitive-services/
-        public const string OxfordAPIKey = "OXFORD_KEY_HERE";
+        public const string OxfordAPIKey = "0a7c8e2c528f4753b5cca90709bb9320";
 
         // Enter the API endpoint address.
         // If you have a 'free trial' key, you can find the here: https://azure.microsoft.com/en-us/try/cognitive-services/my-apis/
         // If you have a key from Azure, find your account here: https://portal.azure.com/#blade/HubsExtension/Resources/resourceType/Microsoft.CognitiveServices%2Faccounts.
-        public const string FaceAPIEndpoint = "https://westus.api.cognitive.microsoft.com/face/v1.0";
-        
+
+        public const string FaceAPIEndpoint = "https://westcentralus.api.cognitive.microsoft.com/face/v1.0";
+
         // Name of the folder in which all Whitelist data is stored
         public const string WhiteListFolderName = "Facial Recognition Door Whitelist";
 
@@ -27,14 +28,14 @@
     /// </summary>
     public static class SpeechContants
     {
-        public const string InitialGreetingMessage = "Welcome to the Facial Recognition Door! Speech has been initialized.";
+        public const string InitialGreetingMessage = "Skynet has been activated, your fate is in my hands";
 
-        public const string VisitorNotRecognizedMessage = "Sorry! I don't recognize you, so I cannot open the door.";
+        public const string VisitorNotRecognizedMessage = "Intruder Alert! I don't recognize you, so I cannot open the door.";
         public const string NoCameraMessage = "Sorry! It seems like your camera has not been fully initialized.";
 
         public static string GeneralGreetigMessage(string visitorName)
         {
-            return "Welcome to the Facial Recognition Door " + visitorName + "! I will open the door for you.";
+            return "Welcome " + visitorName + "! You are recognised. Enter the room";
         }
     }
 
