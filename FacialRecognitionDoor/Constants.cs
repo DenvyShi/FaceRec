@@ -10,7 +10,7 @@
 
         // Oxford Face API Primary should be entered here
         // You can obtain a subscription key for Face API by following the instructions here: https://azure.microsoft.com/en-us/try/cognitive-services/
-        public const string OxfordAPIKey = "the key";
+        public static readonly string OxfordAPIKey = APIKey.OxfordAPIKey;
 
         // Enter the API endpoint address.
         // If you have a 'free trial' key, you can find the here: https://azure.microsoft.com/en-us/try/cognitive-services/my-apis/
