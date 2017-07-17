@@ -198,3 +198,4 @@ FakesAssemblies/
 *.opt
 FacialRecognitionDoor/project.lock.json
 FaceApiClient/project.lock.json
+FaceRec/ApiKey.cs
