@@ -6,9 +6,9 @@
     xmlns:local="using:FacialRecognitionDoor"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" RequestedTheme="Dark">
+    mc:Ignorable="d" RequestedTheme="Dark" Background="#FF5B96A1">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#FF7C98A2">
         <Grid.RowDefinitions>
             <RowDefinition Height="3*" />
             <RowDefinition Height="3*" />
@@ -20,14 +20,14 @@
         </Grid.ColumnDefinitions>
 
         <MediaElement x:Name="speechMediaElement" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="speechMediaElement_Loaded"/>
-        <Grid x:Name="DisabledFeedGrid" Grid.Column="1">
+        <Grid x:Name="NotIdentifiedGrid" Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Rectangle Margin="10" Stroke="White" StrokeThickness="4" Grid.RowSpan="2"/>
-            <Image x:Name="image" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Assets/CameraIcon.png" Margin="50"/>
-            <TextBlock x:Name="DisabledText" TextWrapping="Wrap" Text="The live camera feed has been disabled because of hardware constraints." HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" FontSize="33.333" TextAlignment="Center" Margin="10,0"/>
+            <Image Grid.Row="0" x:Name="CrossImage" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Assets/RedCross.png" Margin="50"/>
+            <TextBlock x:Name="DisabledText" TextWrapping="Wrap" Text="Intruder Alert!!!." HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Row="1" FontSize="50" TextAlignment="Center" Margin="10,0"/>
         </Grid>
         <StackPanel x:Name="LiveFeedPanel" Margin="0, 10" Grid.Row="0" Grid.Column="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
             <CaptureElement x:Name='WebcamFeed' Loaded="WebcamFeed_Loaded"/>
@@ -56,7 +56,7 @@
             <ProgressRing x:Name="OxfordLoadingRing" Grid.Column="0" IsActive="True" Width="113" Height="80" Grid.RowSpan="2" Foreground="White"/>
         </Grid>
         <TextBlock x:Name="WelcomeBlock" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="SkyNet is watching you. Prepare for Authentication" VerticalAlignment="Center" Grid.ColumnSpan="3" FontSize="53.333" Margin="50,0,50,100"/>
-        <TextBlock x:Name="DetailsBlock" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Press the + icon to add a whitelisted user. When you're ready, hit the doorbell icon to try and unlock the door with your face" VerticalAlignment="Center" Grid.ColumnSpan="3" FontSize="33.333" Margin="50,80,50,0" TextAlignment="Center"/>
+        <TextBlock x:Name="DetailsBlock" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Click the + icon to add a whitelisted user. Click the doorbell icon to try and unlock the door" VerticalAlignment="Center" Grid.ColumnSpan="3" FontSize="33.333" Margin="50,80,50,0" TextAlignment="Center"/>
     </Grid>
     <Page.BottomAppBar>
         <CommandBar IsOpen="True" IsSticky="True" IsEnabled="True" Foreground="#FF7C3C3C">

@@ -58,22 +58,22 @@ namespace FacialRecognitionDoor
                 InitializeOxford();
             }
 
-            if(gpioAvailable == false)
+            if (gpioAvailable == false)
             {
                 // If GPIO is not available, attempt to initialize it
                 InitializeGpio();
             }
 
             // If user has set the DisableLiveCameraFeed within Constants.cs to true, disable the feed:
-            if(GeneralConstants.DisableLiveCameraFeed)
+            if (GeneralConstants.DisableLiveCameraFeed)
             {
                 LiveFeedPanel.Visibility = Visibility.Collapsed;
-                DisabledFeedGrid.Visibility = Visibility.Visible;
+                //   DisabledFeedGrid.Visibility = Visibility.Visible;
             }
             else
             {
                 LiveFeedPanel.Visibility = Visibility.Visible;
-                DisabledFeedGrid.Visibility = Visibility.Collapsed;
+                //  NotIdentifiedGrid.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -82,7 +82,7 @@ namespace FacialRecognitionDoor
         /// </summary>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if(initializedOxford)
+            if (initializedOxford)
             {
                 UpdateWhitelistedVisitors();
             }
@@ -147,7 +147,7 @@ namespace FacialRecognitionDoor
                     await webcam.StartCameraPreview();
                 }
             }
-            else if(webcam.IsInitialized())
+            else if (webcam.IsInitialized())
             {
                 WebcamFeed.Source = webcam.mediaCapture;
 
@@ -226,6 +226,7 @@ namespace FacialRecognitionDoor
         {
             // Display analysing visitors grid to inform user that doorbell press was registered
             AnalysingVisitorGrid.Visibility = Visibility.Visible;
+            NotIdentifiedGrid.Visibility = Visibility.Collapsed;
 
             // List to store visitors recognized by Oxford Face API
             // Count will be greater than 0 if there is an authorized visitor at the door
@@ -235,12 +236,12 @@ namespace FacialRecognitionDoor
             if (webcam.IsInitialized() && initializedOxford)
             {
                 // Stores current frame from webcam feed in a temporary folder
-                StorageFile image = await webcam.CapturePhoto();
+                StorageFile CurrentImage = await webcam.CapturePhoto();
 
                 try
                 {
                     // Oxford determines whether or not the visitor is on the Whitelist and returns true if so
-                    recognizedVisitors = await OxfordFaceAPIHelper.IsFaceInWhitelist(image);                    
+                    recognizedVisitors = await OxfordFaceAPIHelper.IsFaceInWhitelist(CurrentImage);
                 }
                 catch (FaceRecognitionException fe)
                 {
@@ -261,16 +262,21 @@ namespace FacialRecognitionDoor
                     // General error. This can happen if there are no visitors authorized in the whitelist
                     Debug.WriteLine("WARNING: Oxford just threw a general expception.");
                 }
-                
-                if(recognizedVisitors.Count > 0)
+
+                if (recognizedVisitors.Count > 0)
                 {
                     // If everything went well and a visitor was recognized, unlock the door:
                     UnlockDoor(recognizedVisitors[0]);
                 }
                 else
                 {
+                    //Display Intruder alert
+                    NotIdentifiedGrid.Visibility = Visibility.Visible;
+
                     // Otherwise, inform user that they were not recognized by the system
                     await speech.Read(SpeechContants.VisitorNotRecognizedMessage);
+
+
                 }
             }
             else
@@ -282,7 +288,7 @@ namespace FacialRecognitionDoor
                     await speech.Read(SpeechContants.NoCameraMessage);
                 }
 
-                if(!initializedOxford)
+                if (!initializedOxford)
                 {
                     // Oxford is still initializing:
                     Debug.WriteLine("Unable to analyze visitor at door as Oxford Facial Recogntion is still initializing.");
@@ -291,6 +297,7 @@ namespace FacialRecognitionDoor
 
             doorbellJustPressed = false;
             AnalysingVisitorGrid.Visibility = Visibility.Collapsed;
+            //  NotIdentifiedGrid.Visibility = Visibility.Collapsed;
         }
 
         /// <summary>
@@ -301,7 +308,7 @@ namespace FacialRecognitionDoor
             // Greet visitor
             await speech.Read(SpeechContants.GeneralGreetigMessage(visitorName));
 
-            if(gpioAvailable)
+            if (gpioAvailable)
             {
                 // Unlock door for specified ammount of time
                 gpioHelper.UnlockDoor();
@@ -312,7 +319,7 @@ namespace FacialRecognitionDoor
         /// Called when user hits vitual add user button. Navigates to NewUserPage page.
         /// </summary>
         private async void NewUserButton_Click(object sender, RoutedEventArgs e)
-        { 
+        {
             // Stops camera preview on this page, so that it can be started on NewUserPage
             await webcam.StopCameraPreview();
 
