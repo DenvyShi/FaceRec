@@ -56,7 +56,7 @@
             <ProgressRing x:Name="OxfordLoadingRing" Grid.Column="0" IsActive="True" Width="113" Height="80" Grid.RowSpan="2" Foreground="White"/>
         </Grid>
         <TextBlock x:Name="WelcomeBlock" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="SkyNet is watching you. Prepare for Authentication" VerticalAlignment="Center" Grid.ColumnSpan="3" FontSize="53.333" Margin="50,0,50,100"/>
-        <TextBlock x:Name="DetailsBlock" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Click the + icon to add a whitelisted user. Click the doorbell icon to try and unlock the door" VerticalAlignment="Center" Grid.ColumnSpan="3" FontSize="33.333" Margin="50,80,50,0" TextAlignment="Center"/>
+        <TextBlock x:Name="DetailsBlock" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="Click the person icon to add a whitelisted user. Click the doorbell icon to try and unlock the door" VerticalAlignment="Center" Grid.ColumnSpan="3" FontSize="33.333" Margin="50,80,50,0" TextAlignment="Center"/>
     </Grid>
     <Page.BottomAppBar>
         <CommandBar IsOpen="True" IsSticky="True" IsEnabled="True" Foreground="#FF00FF2E">
@@ -77,7 +77,7 @@
 
             <AppBarButton x:Name="NewUserButton" Label="Add A New User" Foreground="#FFFFFFFF" Width="84" Click="NewUserButton_Click" >
                 <AppBarButton.Icon>
-                    <BitmapIcon/>
+                    <BitmapIcon UriSource="ms-appx:///Assets/add.png"/>
                 </AppBarButton.Icon>
             </AppBarButton>
             <AppBarButton x:Name="DoorbellButton" Label="Try The Door" Foreground="#FFFFFFFF" Width="84" Click="DoorbellButton_Click">

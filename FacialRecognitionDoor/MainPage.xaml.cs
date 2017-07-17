@@ -419,6 +419,7 @@ namespace FacialRecognitionDoor
         private void ResetButton_OnClickButton_Click(object sender, RoutedEventArgs e)
         {
             DetailsBlock.Text = XamlText.DetailsBlockIntro;
+            webcam.StartCameraPreview();
 
         }
     }
