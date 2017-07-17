@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using FacialRecognitionDoor.Helpers;
 using FacialRecognitionDoor.Objects;
+using FacialRecognitionDoor.TextMods;
 using Microsoft.ProjectOxford.Face;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -260,7 +261,7 @@ namespace FacialRecognitionDoor
                 catch
                 {
                     // General error. This can happen if there are no visitors authorized in the whitelist
-                    Debug.WriteLine("WARNING: Oxford just threw a general expception.");
+                    Debug.WriteLine("WARNING: Oxford just threw a general exception.");
                 }
 
                 if (recognizedVisitors.Count > 0)
@@ -275,8 +276,6 @@ namespace FacialRecognitionDoor
 
                     // Otherwise, inform user that they were not recognized by the system
                     await speech.Read(SpeechContants.VisitorNotRecognizedMessage);
-
-
                 }
             }
             else
@@ -301,12 +300,14 @@ namespace FacialRecognitionDoor
         }
 
         /// <summary>
-        /// Unlocks door and greets visitor
+        /// Unlocks door and greets visitor SUCCESS!!!
         /// </summary>
         private async void UnlockDoor(string visitorName)
         {
             // Greet visitor
             await speech.Read(SpeechContants.GeneralGreetigMessage(visitorName));
+
+            DetailsBlock.Text = XamlText.DetailsBlockSuccess(visitorName);
 
             if (gpioAvailable)
             {
@@ -406,6 +407,19 @@ namespace FacialRecognitionDoor
         {
             // Exit app
             Application.Current.Exit();
+        }
+
+        private void DebugButton_OnClickButton_Click(object sender, RoutedEventArgs e)
+        {
+            DetailsBlock.Text = XamlText.DetailsBlockDebug;
+            webcam.StopCameraPreview();
+            NotIdentifiedGrid.Visibility = Visibility.Visible;
+        }
+
+        private void ResetButton_OnClickButton_Click(object sender, RoutedEventArgs e)
+        {
+            DetailsBlock.Text = XamlText.DetailsBlockIntro;
+
         }
     }
 }
