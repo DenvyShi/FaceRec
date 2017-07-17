@@ -7,7 +7,7 @@
 *.userosscache
 *.sln.docstates
 *.lock.json		
-* ApiKey.cs
+ApiKey.cs
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
